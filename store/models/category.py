@@ -1,7 +1,7 @@
 from django.db import models
-from .mixins import SlugMixin
+from .mixins import SlugMixin, ImageMixin
 
-class Category(SlugMixin):
+class Category(SlugMixin, ImageMixin):
     name = models.CharField('Назва', max_length=100)
     
     class Meta:
@@ -9,7 +9,6 @@ class Category(SlugMixin):
         verbose_name_plural = "Категорії"
         #db_table = "categories"
         ordering = ["name"]    # впливає на всі QuerySet
-        
         
 
     def __str__(self):

@@ -121,3 +121,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+
+MEDIA_URL = "/uploads/"  # URL prefix for media files
+MEDIA_ROOT = BASE_DIR / "uploads"  # де фізично зберігаються медіа-файли

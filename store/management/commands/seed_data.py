@@ -6,6 +6,8 @@ class Command(BaseCommand):
     help = "Заповнює базу даних тестовими даними"
 
     def handle(self, *args, **kwargs):
+            
+            '''
         Product.objects.all().delete()
         Category.objects.all().delete()
 
@@ -43,3 +45,4 @@ class Command(BaseCommand):
             f"Створено {Category.objects.count()} категорій "
             f"і {Product.objects.count()} товарів"
         ))
+            '''

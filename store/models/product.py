@@ -1,14 +1,30 @@
 from django.db import models
-from .mixins import SlugMixin, TimeMixin
+from .mixins import SlugMixin, TimeMixin, ImageMixin
+from .tag import Tag
 
-
-class Product(SlugMixin, TimeMixin):
+class Product(SlugMixin, TimeMixin, ImageMixin):
     category = models.ForeignKey(
         'Category', 
         related_name='products', 
         on_delete=models.SET_NULL, 
         null=True, 
         verbose_name='Категорія')
+    
+    # tags = models.ManyToManyField(
+    #     Tag, 
+    #     blank=True,
+    #     verbose_name='Теги',
+    #     related_name='products', 
+    #     )
+    
+    tags = models.ManyToManyField(
+        Tag, 
+        through='ProductTag', 
+        blank=True, 
+        verbose_name='Теги', 
+        related_name='products')
+    
+    
     name = models.CharField('Назва', max_length=100) 
     description = models.TextField('Опис',blank=True, null=True)
     price = models.DecimalField('Ціна',max_digits=10, decimal_places=2)
@@ -16,6 +32,9 @@ class Product(SlugMixin, TimeMixin):
     stock = models.PositiveIntegerField('На складі',default=0)
     is_available = models.BooleanField('Доступний',default=True)
     total_price = models.DecimalField('Сума',max_digits=10, decimal_places=2, blank=True, null=True, editable=False)
+    
+    
+    
     
     
     class Meta:
