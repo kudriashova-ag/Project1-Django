@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'store',
-    'pages'
+    'pages',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'store.context_processors.categories',
             ],
         },
     },
@@ -125,3 +127,6 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = "/uploads/"  # URL prefix for media files
 MEDIA_ROOT = BASE_DIR / "uploads"  # де фізично зберігаються медіа-файли
+
+
+AUTH_USER_MODEL = 'accounts.User'

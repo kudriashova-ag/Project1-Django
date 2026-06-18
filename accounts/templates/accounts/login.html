@@ -1,0 +1,32 @@
+{% extends "store/base.html" %}
+
+{% block content %}
+    <h1>Вхід</h1>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <p class="message message-{{message.tags}}">{{message}}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" action="{% url "accounts:login" %}">
+        {% csrf_token %}
+        
+        {% for field  in form %}
+            <div style="margin-bottom: 15px;">
+                {{ field.label_tag }}
+                {{ field }}
+            
+                {% if field.errors %}
+                    <div style="color: red;">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit">Увійти</button>
+    </form>
+
+    <p>Не маєте аккаунта? <a href="{% url "accounts:register" %}">Зареєструватись</a></p>
+{% endblock  %}

@@ -12,14 +12,32 @@
     <header>
         <div class="logo">My App</div>
 
+        <nav>
+            {% for category in categories %}
+                {{category.name}}
+            {% endfor %}
+        </nav>
+
         <form method="GET" class="search-bar" action="{% url "store:search" %}">
             <input type="text" name="q" value="{{query}}" placeholder="Введіть назву товару...">
             <button type="submit" class="btn btn-primary">Знайти</button>
         </form>
+
         
         <nav>
             <a href="{% url "contacts" %}">Контакти</a>
+
+            {% if user.is_authenticated %}
+                Привіт, {{ user.username }}!
+                <a href="{% url "accounts:logout" %}">Вийти</a>
+            {% else %}
+                <a href="{% url "accounts:register" %}">Реєстрація</a>
+                <a href="{% url "accounts:login" %}">Вхід</a>
+            {% endif %}
+
         </nav>
+
+
     </header>
     
      <main>

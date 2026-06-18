@@ -44,7 +44,7 @@ def home(request):
         'totalProducts': totalProducts,
         'available_products': available_products,
         'latest_products': latest_products,
-        'heading': '<i>My Store</i>'
+        'heading': '<i>My Store</i>',
         }
     return render(request, "store/home.html", context)
 
