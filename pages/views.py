@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from .forms import ContactForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 
-# Create your views here.
+# @login_required
+@permission_required('store.add_tag', login_url='/')
 def contacts(request):
     if request.method == "POST":
         form = ContactForm(request.POST)

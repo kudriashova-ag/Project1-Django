@@ -14,7 +14,7 @@
 
         <nav>
             {% for category in categories %}
-                {{category.name}}
+                <a href="{% url "store:category_detail" category.slug %}">{{category.name}}</a>
             {% endfor %}
         </nav>
 
@@ -25,7 +25,9 @@
 
         
         <nav>
-            <a href="{% url "contacts" %}">Контакти</a>
+            {% if perms.store.add_product %}
+                <a href="{% url "contacts" %}">Контакти</a>
+            {% endif %}
 
             {% if user.is_authenticated %}
                 Привіт, {{ user.username }}!

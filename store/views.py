@@ -1,8 +1,9 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from .data import PRODUCTS, ORDERS, VALID_CATEGORIES, CATEGORY_NAMES
 from django.views.decorators.csrf import csrf_exempt
-from .models import Product, Category
+from .models import Product, Category, AttributeValue, Attribute
+from django.db.models import Prefetch
 
 # Доможні функції
 def product_to_dict(product_id, product):
@@ -158,4 +159,25 @@ def search(request):
     return render(request, "store/search.html", {
         "query": query,
         "products": products
+    })
+    
+    
+def category_detail(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    
+    # отримати значення атрибутів з товарів, які є в цій категорії
+    category_values = AttributeValue.objects.filter(
+             product_attr__product__category = category
+    ).distinct()
+    
+    attributes = Attribute.objects.filter(
+        values__in = category_values
+    ).prefetch_related(
+        Prefetch("values", queryset=category_values)
+    ).distinct()
+   
+    
+    return render(request, "store/category.html", {
+        "category": category,
+        "attributes": attributes
     })

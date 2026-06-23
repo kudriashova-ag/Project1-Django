@@ -130,3 +130,5 @@ MEDIA_ROOT = BASE_DIR / "uploads"  # де фізично зберігаютьс�
 
 
 AUTH_USER_MODEL = 'accounts.User'
+
+LOGIN_URL = '/login'

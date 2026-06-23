@@ -13,3 +13,21 @@
     opacity: 0.5;
 }
 
+.category-page{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 20px;
+}
+
+.filter{
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.filter h3{
+    margin-top: 0;
+}
